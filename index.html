@@ -3,69 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <meta
+    name="description"
+    content="Interview-ready portfolio for Aditya featuring projects, skills, impact highlights, and editable career details."
+  >
+  <title>Aditya | Interview Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Night Mode Toggle -->
-  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-
-  <!-- Header Section -->
-  <header class="header">
-    <div class="profile-container">
-      <img src="profile.jpg" alt="Profile Photo" class="profile-photo">
-      <h1>Aditya</h1>
-      <p>Aspiring Software Engineer | Web Developer | CSE Student</p>
-      <a href="https://www.linkedin.com/feed/" target="_blank" class="linkedin-btn">LinkedIn</a>
-    </div>
-  </header>
-
-  <!-- About Section -->
-  <section class="about">
-    <h2>About Me</h2>
-    <p>
-      I’m a passionate Computer Science student exploring Web Development, C++, and MERN stack. 
-      My goal is to solve real-world problems with clean and efficient code while learning new technologies.
-    </p>
-  </section>
-
-  <!-- Skills Section -->
-  <section class="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card">C++</div>
-      <div class="skill-card">Python</div>
-      <div class="skill-card">JavaScript</div>
-      <div class="skill-card">HTML</div>
-      <div class="skill-card">CSS</div>
-      <div class="skill-card">Node.js</div>
-      <div class="skill-card">MongoDB</div>
-      <div class="skill-card">Cybersecurity (Beginner)</div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="projects">
-    <h2>Projects</h2>
-    <div class="project-card">
-      <h3>To-Do List App</h3>
-      <p>A simple and interactive task management app built with HTML, CSS, and JS.</p>
-    </div>
-    <div class="project-card">
-      <h3>Event Tracker Website</h3>
-      <p>A platform for students to organize and track events with RSVP and reminders.</p>
-    </div>
-    <div class="project-card">
-      <h3>AR Furniture Website</h3>
-      <p>Furniture shopping experience with Augmented Reality using 8thWall.</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Aditya | Made with ❤️ & JavaScript</p>
-  </footer>
-
+  <div class="page-shell" id="top">
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <span class="theme-toggle__icon">Dark</span>
+    </button>
+    <main id="app"></main>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
