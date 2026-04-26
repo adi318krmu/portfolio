@@ -1,6 +1,6 @@
 const portfolioData = {
   meta: {
-    name: "Aditya",
+    name: "Aditya  Singh",
     title: "",
     roleLine: "CSE student building practical web products with strong fundamentals in JavaScript, C++, and modern frontend development.",
     location: "India",
@@ -97,48 +97,48 @@ const portfolioData = {
     ],
   },
   projects: {
-    title: "Selected Projects",
-    subtitle:
-      "",
-    items: [
-      {
-        name: "To-Do List App",
-        summary:
-          "A lightweight task management app focused on usability, responsiveness, and smooth client-side interactions.",
-        impact: [
-          "Built an intuitive interface for adding, tracking, and managing daily tasks.",
-          "Strengthened DOM manipulation and event handling fundamentals.",
-          "Good talking point for explaining clean UI logic in interviews.",
-        ],
-        stack: ["HTML", "CSS", "JavaScript"],
-        link: "#",
-      },
-      {
-        name: "Event Tracker Website",
-        summary:
-          "A platform concept for organizing student events, tracking schedules, and improving coordination.",
-        impact: [
-          "Designed around real student use cases such as reminders and event visibility.",
-          "Helps demonstrate product thinking, information structure, and frontend planning.",
-          "Can be expanded with backend support later.",
-        ],
-        stack: ["HTML", "CSS", "JavaScript"],
-        link: "#",
-      },
-      {
-        name: "AR Furniture Website",
-        summary:
-          "An immersive furniture browsing experience exploring how augmented reality can improve online shopping decisions.",
-        impact: [
-          "Shows curiosity for emerging technology and user-centric product ideas.",
-          "Useful for discussing experimentation and innovation during interviews.",
-          "Highlights interest beyond standard classroom projects.",
-        ],
-        stack: ["Web", "UI", "8thWall", "AR Concept"],
-        link: "#",
-      },
-    ],
-  },
+  title: "Selected Projects",
+  subtitle: "",
+  items: [
+    {
+      name: "AI GitHub Analyzer",
+      summary:
+        "A backend system that analyzes GitHub repositories using AI and custom scoring logic to evaluate code quality, structure, and best practices.",
+      impact: [
+        "Integrated GitHub API to fetch repository data (README, file structure), processing 100+ repositories during testing.",
+        "Designed a weighted scoring engine generating an interview readiness score, improving evaluation consistency by 40%.",
+        "Implemented secure authentication using JWT and bcrypt with multi-user analysis tracking stored in MongoDB.",
+        "Optimized API performance with rate limiting, handling 100+ requests/min without failure."
+      ],
+      stack: ["Node.js", "Express", "MongoDB", "JWT", "AI"],
+      link: "https://github.com/adi318krmu/RepoLens"
+    },
+    {
+      name: "VendorSetu",
+      summary:
+        "A platform enabling vendors to purchase affordable and verified food supplies with efficient backend architecture.",
+      impact: [
+        "Onboarded 20+ test users during initial deployment.",
+        "Built backend using Node.js, Express, and MongoDB supporting 50+ product listings.",
+        "Implemented JWT-based authentication and optimized REST APIs reducing response time by 25%."
+      ],
+      stack: ["Node.js", "Express", "MongoDB"],
+      link: "https://vendor-setu.vercel.app"
+    },
+    {
+      name: "Campus Learn",
+      summary:
+        "A Hybrid RAG-based academic assistant that provides syllabus-based answers from faculty-uploaded notes.",
+      impact: [
+        "Tested with 30+ users for real academic use cases.",
+        "Processed and indexed 100+ academic documents using vector embeddings.",
+        "Improved answer relevance by 35% using retrieval-augmented generation."
+      ],
+      stack: ["RAG", "Vector DB", "AI", "Node.js"],
+      link: "https://campus-learn-lms-zqft.vercel.app"
+    }
+  ]
+},
   timeline: {
     title: "Education And Growth",
     subtitle:
