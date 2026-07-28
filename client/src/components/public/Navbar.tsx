@@ -118,9 +118,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
             {/* Resume Button */}
             <a
-              href={resumeUrl}
+              href={resumeUrl || "/resume.pdf"}
               target="_blank"
               rel="noopener noreferrer"
+              download="Aditya_Singh_Resume.pdf"
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white rounded-full shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
             >
               <FileText className="w-3.5 h-3.5" />

@@ -143,9 +143,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             {/* Direct Resume Download */}
             <div className="pt-2 border-t border-white/10">
               <a
-                href={resumeUrl}
+                href={resumeUrl || "/resume.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
+                download="Aditya_Singh_Resume.pdf"
                 className="flex items-center justify-between p-2.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 text-xs font-semibold transition-colors"
               >
                 <div className="flex items-center gap-2">

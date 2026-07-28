@@ -37,7 +37,14 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         setExperiences(res.data.experiences || []);
         setEducation(res.data.education || []);
         setCertificates(res.data.certificates || []);
-        setResumeUrl(res.data.resume || "/resume.pdf");
+        
+        let fetchedResume = res.data.resume || "/resume.pdf";
+        if (fetchedResume.startsWith("/uploads/")) {
+          const apiBase = import.meta.env.VITE_API_URL || "";
+          fetchedResume = `${apiBase.replace(/\/$/, "")}${fetchedResume}`;
+        }
+        setResumeUrl(fetchedResume);
+        
         setSettings(res.data.settings || null);
         setBlogs(res.data.blogs || []);
       }

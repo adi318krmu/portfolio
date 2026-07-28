@@ -186,7 +186,7 @@ export const HeroSection: React.FC = () => {
                 alt={hero.name}
                 className="w-full h-96 sm:h-[26rem] object-cover rounded-2xl filter brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80";
+                  (e.target as HTMLImageElement).src = "/interview-photo.jpeg";
                 }}
               />
 
