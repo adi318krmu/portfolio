@@ -1,63 +1,43 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Clock, Code, Server, Bot, Layout, Terminal, Database, Cpu, ArrowRight } from "lucide-react";
+import { Sparkles, Code, Server, Bot, Layout, Terminal, Database, Cpu, ArrowRight } from "lucide-react";
 
-const FREELANCE_SERVICES = [
+const CAPABILITIES = [
   {
     title: "Full Stack Development",
-    description: "End-to-end web application development from scalable database schema design to responsive modern frontend UI.",
-    tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "TailwindCSS"],
-    timeline: "2 - 4 Weeks",
+    description: "End-to-end web application engineering from responsive React components to Node.js / Express backend services and database schemas.",
+    tech: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     icon: <Code className="w-5 h-5 text-indigo-400" />
   },
   {
-    title: "Backend APIs",
-    description: "High-throughput RESTful & Microservice APIs with JWT security, rate-limiting, error handling, and robust DB models.",
-    tech: ["Node.js", "FastAPI", "Express", "PostgreSQL", "MongoDB", "Docker"],
-    timeline: "1 - 2 Weeks",
+    title: "Backend & Microservice APIs",
+    description: "Designing RESTful API endpoints with secure JWT authentication, role-based authorization, request validation, and error handling.",
+    tech: ["Node.js", "Express.js", "FastAPI", "PostgreSQL", "MongoDB", "REST APIs"],
     icon: <Server className="w-5 h-5 text-emerald-400" />
   },
   {
-    title: "AI Integration",
-    description: "Custom AI workflows incorporating Gemini AI, LangGraph, Hugging Face models, and Hybrid RAG vector search.",
-    tech: ["Gemini AI", "LangGraph", "Vector DB", "Python", "FastAPI"],
-    timeline: "1 - 3 Weeks",
+    title: "AI Product Integration",
+    description: "Integrating Gemini AI models, LangGraph evaluation loops, and Hugging Face inference APIs into full-stack web applications.",
+    tech: ["Gemini AI", "LangGraph", "Hugging Face API", "Python", "FastAPI"],
     icon: <Bot className="w-5 h-5 text-purple-400" />
   },
   {
-    title: "MERN Development",
-    description: "Custom MERN stack products engineered with clean component hierarchy, authentication, and cloud deployment.",
-    tech: ["MongoDB", "Express", "React", "Node.js", "Vercel"],
-    timeline: "2 - 3 Weeks",
-    icon: <Cpu className="w-5 h-5 text-cyan-400" />
-  },
-  {
-    title: "Dashboard Development",
-    description: "Ultra-sleek admin panels, analytics dashboards, and custom CMS platforms tailored for operational efficiency.",
-    tech: ["React", "TailwindCSS", "Framer Motion", "Recharts", "Node.js"],
-    timeline: "1 - 2 Weeks",
-    icon: <Layout className="w-5 h-5 text-pink-400" />
-  },
-  {
-    title: "Website Development",
-    description: "Ultra-fast, production-ready dark-themed websites with smooth animations, SEO optimization, and mobile responsiveness.",
-    tech: ["React", "TypeScript", "TailwindCSS", "Framer Motion"],
-    timeline: "1 Week",
-    icon: <Terminal className="w-5 h-5 text-amber-400" />
-  },
-  {
-    title: "Database Design",
-    description: "Relational & NoSQL schema design, query index optimization, aggregation pipelines, and data migration strategies.",
-    tech: ["MongoDB", "Mongoose", "PostgreSQL", "Prisma"],
-    timeline: "3 - 7 Days",
+    title: "Database Architecture",
+    description: "Relational and NoSQL database modeling, Mongoose aggregation pipelines, indexing, and Supabase / PostgreSQL integration.",
+    tech: ["MongoDB", "PostgreSQL", "Supabase", "MySQL", "Mongoose"],
     icon: <Database className="w-5 h-5 text-blue-400" />
   },
   {
-    title: "Automation",
-    description: "Automated data processing scripts, web scraping engines, repository analyzers, and CI/CD workflow triggers.",
-    tech: ["Python", "Node.js", "Docker", "GitHub Actions"],
-    timeline: "3 - 7 Days",
-    icon: <Sparkles className="w-5 h-5 text-rose-400" />
+    title: "Developer Tools & Automation",
+    description: "Building automated analysis engines, repository scanners, code evaluation workflows, and CI/CD deployment pipelines.",
+    tech: ["Docker", "AWS EC2", "NGINX", "GitHub Actions", "Python"],
+    icon: <Terminal className="w-5 h-5 text-amber-400" />
+  },
+  {
+    title: "Clean UI & User Experience",
+    description: "Crafting modern, accessible, and responsive user interfaces with glassmorphism aesthetics and smooth Framer Motion animations.",
+    tech: ["React", "Tailwind CSS", "Framer Motion", "Lucide Icons"],
+    icon: <Layout className="w-5 h-5 text-pink-400" />
   }
 ];
 
@@ -71,21 +51,21 @@ export const FreelanceSection: React.FC = () => {
     <section id="freelance" className="py-20 px-4 max-w-6xl mx-auto relative">
       {/* Section Header */}
       <div className="text-center space-y-3 mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Available for Freelance & Contracts</span>
+          <span>Core Engineering Focus</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-          Custom Engineering <span className="text-gradient">Services</span>
+          Services & Technical <span className="text-gradient">Capabilities</span>
         </h2>
         <p className="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto">
-          Need a high-performance web app, AI integration, or microservice API? Here are the specialized services I deliver.
+          What I bring to software engineering teams, internships, and full-stack product development.
         </p>
       </div>
 
-      {/* Services Matrix Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {FREELANCE_SERVICES.map((service, idx) => (
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {CAPABILITIES.map((service, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 20 }}
@@ -111,22 +91,6 @@ export const FreelanceSection: React.FC = () => {
                   </span>
                 ))}
               </div>
-
-              {/* Timeline & Action */}
-              <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-zinc-400 font-mono flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-indigo-400" />
-                  {service.timeline}
-                </span>
-
-                <button
-                  onClick={scrollToContact}
-                  className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1"
-                >
-                  <span>Discuss</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
-              </div>
             </div>
           </motion.div>
         ))}
@@ -134,15 +98,15 @@ export const FreelanceSection: React.FC = () => {
 
       {/* Main CTA Banner */}
       <div className="mt-12 glass-card p-8 rounded-3xl border border-indigo-500/30 text-center space-y-4 bg-gradient-to-r from-indigo-950/40 via-purple-950/40 to-indigo-950/40">
-        <h3 className="text-2xl font-bold text-white">Have an innovative project idea in mind?</h3>
+        <h3 className="text-2xl font-bold text-white">Looking for a motivated Software Engineer?</h3>
         <p className="text-sm text-zinc-300 max-w-xl mx-auto">
-          Let's discuss scope, system architecture, timelines, and turn your vision into a production-ready application.
+          I am actively open to full-time software engineering roles and internship opportunities where I can add value and continue growing.
         </p>
         <button
           onClick={scrollToContact}
           className="px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm rounded-xl shadow-xl shadow-indigo-600/30 transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2"
         >
-          <span>Let's Discuss Your Project</span>
+          <span>Get in Touch</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

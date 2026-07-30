@@ -14,7 +14,7 @@ export const seedDatabase = async () => {
     // 1. Admin User
     const adminCount = await Admin.countDocuments();
     if (adminCount === 0) {
-      const email = process.env.ADMIN_EMAIL || "adityaks0604@gmail.com";
+      const email = process process.env.ADMIN_EMAIL || "adityaks0604@gmail.com";
       const rawPassword = process.env.ADMIN_PASSWORD || "admin123456";
       const hashedPassword = await bcrypt.hash(rawPassword, 10);
       
@@ -26,45 +26,53 @@ export const seedDatabase = async () => {
       console.log(`[Seed] Admin user created: ${email}`);
     }
 
-    // 2. Website Settings - Aditya's Real Resume Profile
+    // 2. Website Settings - Authentic Profile Data
     await WebsiteSettings.deleteMany({});
     await WebsiteSettings.create({
       hero: {
         name: "Aditya Singh",
-        subtitle: "Full Stack Developer & AI Solutions Engineer",
+        subtitle: "Full Stack Developer & Computer Science Student",
         typingText: [
-          "MERN & FastAPI Specialist",
-          "Hybrid RAG & Vector Search Engineer",
-          "220+ LeetCode Solved (Max 1653)",
-          "Microservices & Docker Architect"
+          "Full Stack Developer",
+          "Backend Developer",
+          "MERN Stack Developer",
+          "AI Enthusiast"
         ],
-        availability: "Open to Full-Time Roles, Internships & High-Impact Freelance Work",
+        availability: "Open to Full-Time Roles & Internship Opportunities",
         profileImage: "/interview-photo.jpeg",
-        focusAreas: ["Full Stack Web", "AI Systems", "REST APIs", "DSA & Algorithms"],
+        focusAreas: [
+          "React.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "REST APIs",
+          "JWT Authentication"
+        ],
         callouts: [
-          { value: "220+", label: "LeetCode Solved (Max 1653)" },
-          { value: "90+", label: "Codeforces Solved (Max 1066)" },
+          { value: "220+", label: "LeetCode Solved" },
+          { value: "90+", label: "Codeforces Solved" },
           { value: "15+", label: "Coding Contests" },
-          { value: "35%", label: "RAG Accuracy Boost" }
+          { value: "3", label: "Production Projects" },
+          { value: "Oracle AI", label: "Foundations Certified" }
         ]
       },
       about: {
         title: "About Aditya Singh",
-        bio: "Full-Stack Developer experienced in building scalable web applications, REST APIs, and AI-powered solutions using React, Node.js, Express, MongoDB, and C++. Strong foundation in Data Structures & Algorithms and software engineering principles.",
-        journey: "I have engineered DevBattles (AI coding assessment platform on AWS EC2 & Docker), RepoLens (AI Resume & GitHub analyzer using Hugging Face), and Campus Learn (Hybrid RAG study assistant). Completed Web Development Internship at InAmigos Foundation.",
+        bio: "Computer Science student passionate about building scalable web applications, backend systems, and AI-powered products using React, Node.js, Express, MongoDB, and modern development tools.",
+        journey: "Experienced in engineering full-stack platforms like DevBattles, RepoLens, and Campus Learn while solving 220+ LeetCode problems and competing in coding contests.",
         strengths: [
-          "DSA & Algorithm Optimization",
-          "Microservices Architecture (FastAPI & Node.js)",
-          "Hybrid RAG & Vector Database Embeddings",
-          "JWT & Role-Based Authorization",
-          "Clean React UI & Responsive Design",
-          "Docker & Cloud Deployment Workflows"
+          "Computer Science Student",
+          "Backend Development & REST APIs",
+          "MERN Stack (MongoDB, Express, React, Node)",
+          "AI-Powered Application Integration",
+          "Data Structures & Problem Solving",
+          "Git, Docker & Deployment Workflows"
         ],
         achievements: [
-          "Solved 220+ problems on LeetCode with max rating 1653 and 100 Days Badge.",
-          "Solved 90+ problems on Codeforces with max rating 1066.",
-          "Oracle AI Foundations Associate Certified.",
-          "Web Development Intern at InAmigos Foundation (2026)."
+          "Solved 220+ problems on LeetCode (Max Rating: 1653) & 90+ on Codeforces.",
+          "Engineered AI-assisted coding platform DevBattles and RepoLens GitHub analyzer.",
+          "Completed Web Development Internship at InAmigos Foundation.",
+          "Oracle AI Foundations Associate Certified."
         ]
       },
       socialLinks: {
@@ -79,34 +87,30 @@ export const seedDatabase = async () => {
         location: "Gurugram, Haryana, India"
       },
       seo: {
-        title: "Aditya Singh | Full Stack Developer & AI Engineer",
+        title: "Aditya Singh | Full Stack Developer & Computer Science Student",
         description: "Official portfolio of Aditya Singh featuring DevBattles, RepoLens, Campus Learn, and real-world full-stack web applications."
       }
     });
 
-    // 3. Real Projects from Resume
+    // 3. Real Projects
     await Project.deleteMany({});
     await Project.insertMany([
       {
-        title: "DevBattles",
+        title: "DevBattles – AI Coding Assessment Platform",
         slug: "devbattles",
         summary: "AI-Powered Coding Assessment Platform with teacher-managed contests, student submissions, and LLM-driven evaluation.",
         description: "Built an AI-powered coding assessment platform supporting teacher-managed coding contests, student submissions, and automated evaluation through LLM-based workflows. Deployed on AWS EC2 using NGINX, PM2, Docker, and GitHub Actions CI/CD with Google Gemini & LangGraph integration.",
-        architecture: "Designed a microservices architecture using Node.js, Express.js, FastAPI, React, PostgreSQL (Supabase), and JWT, integrating secure authentication, role-based authorization, and scalable REST APIs.",
-        challenges: "Achieving sub-second code evaluation in isolated Docker containers, preventing infinite loops, and structuring LangGraph feedback loops for real-time AI code analysis.",
+        architecture: "Microservices Architecture: React UI -> Node.js API Gateway -> Supabase PostgreSQL DB -> FastAPI Docker Worker Service -> Gemini AI & LangGraph pipeline.",
+        challenges: "Achieving sub-second code evaluation in isolated Docker containers while preventing memory leaks and managing concurrent updates.",
         features: [
-          "Teacher-managed coding contests & student submission portal",
-          "Automated evaluation through LLM-based workflows",
-          "Microservices with Node.js, Express.js, FastAPI & React",
-          "PostgreSQL (Supabase) database with JWT authorization",
-          "Deployed on AWS EC2 with NGINX, PM2, Docker & GitHub Actions",
-          "Google Gemini AI & LangGraph code feedback integration"
+          "Teacher contest creation & live student portal",
+          "Automated multi-language code evaluation in Docker",
+          "Google Gemini & LangGraph AI code analysis",
+          "PostgreSQL (Supabase) DB with JWT role authorization",
+          "Live contest leaderboards & score tracking",
+          "Deployed on AWS EC2 with NGINX & PM2"
         ],
-        stack: ["React", "Node.js", "Express.js", "FastAPI", "PostgreSQL", "Supabase", "Docker", "AWS EC2", "Gemini AI", "LangGraph", "NGINX"],
-        thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80",
-        gallery: [
-          "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80"
-        ],
+        stack: ["React", "Node.js", "Express.js", "FastAPI", "PostgreSQL", "Supabase", "Docker", "AWS EC2", "Gemini AI", "LangGraph"],
         githubUrl: "https://github.com/adi318krmu/DevBattles",
         liveUrl: "https://devbattles.vercel.app",
         featured: true,
@@ -118,20 +122,16 @@ export const seedDatabase = async () => {
         slug: "repolens",
         summary: "Full-Stack AI Application analyzing PDF resumes & GitHub repos against 10+ job roles using Hugging Face API.",
         description: "Developed a full-stack AI-powered application using Hugging Face Inference API to analyze resumes (PDF) and GitHub repositories against 10+ job roles, generating candidate readiness scores and personalized feedback.",
-        architecture: "Node.js, Express.js, MongoDB, JWT, and bcrypt REST API layer backed by Hugging Face inference pipeline and GitHub REST API parser.",
-        challenges: "Parsing complex PDF resume structures, computing weighted repository scores across commit history, and rate-limiting endpoints to handle 100+ requests/minute reliably.",
+        architecture: "REST API Architecture: React UI -> Express.js API -> GitHub REST API scanner -> Hugging Face AI Inference Engine -> MongoDB analytics datastore.",
+        challenges: "Parsing non-standard PDF resume structures reliably and aggregating weighted GitHub repository scores without triggering rate limits.",
         features: [
           "Analyzes PDF resumes & GitHub repos against 10+ job roles",
-          "Weighted evaluation engine assessing 50+ resumes & 100+ repos",
+          "Scans commit frequency, repo stars, language breakdown, and README quality",
           "Hugging Face AI inference integration for candidate scoring",
-          "Secure REST APIs with Node.js, Express.js, MongoDB, JWT & bcrypt",
+          "Secure REST APIs with Node.js, Express, MongoDB, JWT & bcrypt",
           "Rate-limited endpoints supporting 100+ API requests/minute"
         ],
         stack: ["React", "Node.js", "Express.js", "MongoDB", "JWT", "bcrypt", "Hugging Face API", "TailwindCSS"],
-        thumbnail: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=1200&auto=format&fit=crop&q=80",
-        gallery: [
-          "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=1200&auto=format&fit=crop&q=80"
-        ],
         githubUrl: "https://github.com/adi318krmu/RepoLens",
         liveUrl: "https://repo-lens.vercel.app",
         featured: true,
@@ -139,23 +139,19 @@ export const seedDatabase = async () => {
         order: 2
       },
       {
-        title: "Campus Learn",
+        title: "Campus Learn – Hybrid RAG Academic Assistant",
         slug: "campus-learn",
         summary: "Hybrid RAG-Based Academic Assistant enabling syllabus-based Q&A over faculty lecture notes.",
         description: "Developed a Hybrid RAG-based academic assistant that enables students to get syllabus-based answers from faculty-uploaded notes. Processed and indexed over 100 academic documents using vector embeddings, improving answer relevance by 35% compared to direct LLMs.",
-        architecture: "Hybrid Retrieval Augmented Generation combining keyword matching and vector embeddings for semantic document search.",
-        challenges: "Reducing LLM hallucinations by restricting context to faculty study materials and chunking dense academic PDFs efficiently.",
+        architecture: "Hybrid RAG Pipeline: React Frontend -> Node.js API -> Python Vector Database Service -> Hybrid Keyword + Semantic Search -> Gemini Synthesis.",
+        challenges: "Efficiently chunking dense academic slides and mathematical formulas without losing document hierarchy or context.",
         features: [
           "Hybrid RAG search over faculty-uploaded notes & syllabus documents",
           "Vector embeddings indexing over 100+ academic PDFs",
           "35% answer relevance improvement over baseline LLM responses",
-          "Tested with 30+ active student users"
+          "Source citation display pointing directly to source lecture slides"
         ],
-        stack: ["React", "Node.js", "Python", "Vector DB", "Hybrid RAG", "MongoDB"],
-        thumbnail: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&auto=format&fit=crop&q=80",
-        gallery: [
-          "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&auto=format&fit=crop&q=80"
-        ],
+        stack: ["React", "Node.js", "Python", "Vector DB", "Hybrid RAG", "MongoDB", "TailwindCSS"],
         githubUrl: "https://github.com/adi318krmu/Campus-Learn",
         liveUrl: "https://campus-learn-lms-zqft.vercel.app",
         featured: true,
@@ -164,58 +160,40 @@ export const seedDatabase = async () => {
       }
     ]);
 
-    // 4. Exact Real Technical Skills from Resume
+    // 4. Skills Categorized
     await Skill.deleteMany({});
     await Skill.insertMany([
-      // Languages
-      { name: "C++", category: "Programming", level: 92, icon: "Code", order: 1 },
-      { name: "Python", category: "Programming", level: 86, icon: "Terminal", order: 2 },
-      { name: "JavaScript (ES6+)", category: "Programming", level: 94, icon: "FileCode", order: 3 },
-      { name: "TypeScript (Basic)", category: "Programming", level: 82, icon: "FileCode", order: 4 },
+      // Advanced
+      { name: "React.js", category: "Frontend", level: 95, icon: "Code", order: 1 },
+      { name: "Node.js", category: "Backend", level: 92, icon: "Server", order: 2 },
+      { name: "Express.js", category: "Backend", level: 94, icon: "Cpu", order: 3 },
+      { name: "MongoDB", category: "Database", level: 90, icon: "Database", order: 4 },
+      { name: "JavaScript", category: "Programming", level: 95, icon: "FileCode", order: 5 },
+      { name: "C++", category: "Programming", level: 92, icon: "Binary", order: 6 },
 
-      // Backend
-      { name: "Node.js", category: "Backend", level: 92, icon: "Server", order: 5 },
-      { name: "Express.js", category: "Backend", level: 94, icon: "Cpu", order: 6 },
-      { name: "FastAPI", category: "Backend", level: 85, icon: "Zap", order: 7 },
-      { name: "REST APIs", category: "Backend", level: 95, icon: "Network", order: 8 },
-      { name: "JWT Authentication", category: "Backend", level: 92, icon: "Lock", order: 9 },
+      // Intermediate
+      { name: "Supabase", category: "Database", level: 85, icon: "Database", order: 7 },
+      { name: "MySQL", category: "Database", level: 85, icon: "Database", order: 8 },
+      { name: "Tailwind CSS", category: "Frontend", level: 90, icon: "Palette", order: 9 },
+      { name: "JWT", category: "Backend", level: 90, icon: "Lock", order: 10 },
+      { name: "Python", category: "Programming", level: 84, icon: "Terminal", order: 11 },
 
-      // Database
-      { name: "MongoDB", category: "Database", level: 90, icon: "Database", order: 10 },
-      { name: "MySQL & SQL", category: "Database", level: 85, icon: "Database", order: 11 },
-      { name: "Supabase & PostgreSQL", category: "Database", level: 84, icon: "Database", order: 12 },
-
-      // Frontend
-      { name: "React.js", category: "Frontend", level: 94, icon: "Layout", order: 13 },
-      { name: "HTML5 & CSS3", category: "Frontend", level: 95, icon: "Globe", order: 14 },
-      { name: "Tailwind CSS", category: "Frontend", level: 92, icon: "Palette", order: 15 },
-
-      // Tools & Platforms
-      { name: "Git & GitHub", category: "Tools", level: 92, icon: "GitBranch", order: 16 },
-      { name: "Firebase", category: "Tools", level: 82, icon: "Cloud", order: 17 },
-      { name: "Postman", category: "Tools", level: 90, icon: "Send", order: 18 },
-      { name: "Vercel & Render", category: "Tools", level: 90, icon: "CloudUpload", order: 19 },
-
-      // Cloud & DevOps
-      { name: "Deployment Workflows & CI/CD", category: "DevOps", level: 84, icon: "Boxes", order: 20 },
-      { name: "Docker (Learning)", category: "DevOps", level: 80, icon: "Box", order: 21 },
-      { name: "AWS EC2 & NGINX", category: "Cloud", level: 82, icon: "Cloud", order: 22 },
-
-      // Core CS
-      { name: "Data Structures & Algorithms (DSA)", category: "Core Subjects", level: 92, icon: "Binary", order: 23 },
-      { name: "Object-Oriented Programming (OOP)", category: "Core Subjects", level: 90, icon: "Box", order: 24 },
-      { name: "Database Management Systems (DBMS)", category: "Core Subjects", level: 88, icon: "Database", order: 25 },
-      { name: "Computer Networks", category: "Core Subjects", level: 84, icon: "Wifi", order: 26 }
+      // Basic Working Knowledge
+      { name: "Docker", category: "DevOps", level: 75, icon: "Box", order: 12 },
+      { name: "AWS EC2", category: "Cloud", level: 75, icon: "Cloud", order: 13 },
+      { name: "NGINX", category: "DevOps", level: 75, icon: "Boxes", order: 14 },
+      { name: "GitHub Actions", category: "DevOps", level: 75, icon: "GitBranch", order: 15 },
+      { name: "LangGraph", category: "AI", level: 75, icon: "Bot", order: 16 }
     ]);
 
-    // 5. Exact Education from Resume
+    // 5. Education
     await Education.deleteMany({});
     await Education.insertMany([
       {
         degree: "Bachelor of Technology in Computer Science & Engineering",
         institution: "K.R. Mangalam University, Gurugram, India",
-        period: "2023 - Present",
-        score: "Pursuing B.Tech CSE",
+        period: "2023 - 2027",
+        score: "CGPA 8.0 / 10",
         descriptionPoints: [
           "Specialized in Software Engineering, Web Systems, and Data Structures & Algorithms."
         ],
@@ -228,18 +206,10 @@ export const seedDatabase = async () => {
         score: "85%",
         descriptionPoints: ["Physics, Chemistry, Mathematics background."],
         order: 2
-      },
-      {
-        degree: "Class Xth (CBSE)",
-        institution: "C.D. International School, Gurugram, India",
-        period: "2020 - 2021",
-        score: "95%",
-        descriptionPoints: ["Achieved 95% aggregate."],
-        order: 3
       }
     ]);
 
-    // 6. Real Experience from Resume
+    // 6. Real Experience
     await Experience.deleteMany({});
     await Experience.create({
       title: "Web Development Intern",
@@ -247,27 +217,35 @@ export const seedDatabase = async () => {
       location: "Gurugram, India",
       period: "2026",
       descriptionPoints: [
-        "Developed and maintained responsive web pages using HTML, CSS, JavaScript, and React.",
-        "Collaborated with team members to improve website UI/UX and optimize user engagement.",
-        "Assisted in integrating backend APIs and managing dynamic content for organization activities.",
-        "Participated in debugging, testing, and deployment of web modules.",
-        "Worked with Git and GitHub for version control and collaborative development."
+        "Developed and maintained responsive web pages using React and JavaScript.",
+        "Collaborated with team members to improve UI/UX and optimize user engagement.",
+        "Integrated backend REST APIs and managed dynamic content modules.",
+        "Used Git and GitHub for version control and team code reviews."
       ],
       tags: ["React", "JavaScript", "HTML/CSS", "Git", "REST APIs"],
       order: 1
     });
 
-    // 7. Certifications from Resume
+    // 7. Certifications
     await Certificate.deleteMany({});
-    await Certificate.create({
-      title: "Oracle AI Foundations Associate",
-      issuer: "Oracle",
-      issueDate: "2024",
-      credentialUrl: "https://github.com/adi318krmu",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
-      tags: ["Artificial Intelligence", "Machine Learning", "Oracle Cloud AI", "Generative AI"],
-      order: 1
-    });
+    await Certificate.insertMany([
+      {
+        title: "Oracle AI Foundations Associate",
+        issuer: "Oracle",
+        issueDate: "2024",
+        credentialUrl: "https://github.com/adi318krmu",
+        tags: ["Artificial Intelligence", "Machine Learning", "Oracle Cloud AI"],
+        order: 1
+      },
+      {
+        title: "GirlScript Summer of Code (GSSOC) Contributor",
+        issuer: "GirlScript Foundation",
+        issueDate: "2024",
+        credentialUrl: "https://github.com/adi318krmu",
+        tags: ["Open Source", "Git & GitHub", "React", "Node.js"],
+        order: 2
+      }
+    ]);
 
     // 8. Resume PDF
     await Resume.deleteMany({});
@@ -276,7 +254,7 @@ export const seedDatabase = async () => {
       pdfUrl: "/resume.pdf"
     });
 
-    console.log("[Seed] Real resume database seeding complete!");
+    console.log("[Seed] Seeding complete!");
   } catch (error) {
     console.error("[Seed Error]", error);
   }

@@ -1,28 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, Github, Linkedin, Sparkles, Terminal, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Mail, Github, Linkedin, Sparkles, Terminal, FileText } from "lucide-react";
 import { usePortfolio } from "../../context/PortfolioContext";
 
-export const HeroSection: React.FC = () => {
-  const { settings, resumeUrl } = usePortfolio();
+interface HeroSectionProps {
+  onOpenResumeModal?: () => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) => {
+  const { settings } = usePortfolio();
   
-  const hero = settings?.hero || {
-    name: "Aditya Singh",
-    subtitle: "Full Stack Engineer & AI Microservices Architect",
+  // Real Authentic Profile Configuration
+  const hero = {
+    name: settings?.hero?.name || "Aditya Singh",
+    subtitle: "Full Stack Developer & Computer Science Student",
     typingText: [
-      "MERN & FastAPI Specialist",
-      "Hybrid RAG & Vector DB Engineer",
-      "Microservices & Docker Architect",
-      "C++ Competitive Programmer"
+      "Full Stack Developer",
+      "Backend Developer",
+      "MERN Stack Developer",
+      "AI Enthusiast"
     ],
-    availability: "Available for High-Impact Roles & Freelance Projects",
-    profileImage: "/interview-photo.jpeg",
-    focusAreas: ["Full Stack Dev", "AI Engineering", "Microservices", "System Architecture"],
+    availability: "Open to Full-Time Roles & Internship Opportunities",
+    profileImage: settings?.hero?.profileImage || "/interview-photo.jpeg",
+    focusAreas: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "REST APIs",
+      "JWT Authentication"
+    ],
     callouts: [
-      { value: "4+", label: "Production Systems" },
-      { value: "100%", label: "Mini-CMS Managed" },
-      { value: "40%", label: "Eval Performance Boost" },
-      { value: "24/7", label: "Ready to Ship Code" }
+      { value: "220+", label: "LeetCode Problems" },
+      { value: "90+", label: "Codeforces Problems" },
+      { value: "15+", label: "Coding Contests" },
+      { value: "3", label: "Production Projects" },
+      { value: "Oracle AI", label: "Foundations Certified" }
     ]
   };
 
@@ -37,10 +50,7 @@ export const HeroSection: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const phrases = hero.typingText && hero.typingText.length > 0
-      ? hero.typingText
-      : ["Full Stack Engineer", "AI Developer"];
-    
+    const phrases = hero.typingText;
     const targetPhrase = phrases[typingIndex % phrases.length];
     const typingSpeed = isDeleting ? 40 : 80;
 
@@ -87,35 +97,39 @@ export const HeroSection: React.FC = () => {
             <span>{hero.availability}</span>
           </div>
 
-          {/* Name & Title */}
+          {/* Name & Dynamic Typing Subtitle */}
           <div className="space-y-2">
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Hi, I'm <span className="text-gradient">{hero.name}</span>
             </h1>
             
             {/* Dynamic Typing Text Subtitle */}
-            <div className="flex items-center gap-2 text-lg sm:text-2xl font-semibold text-indigo-400 h-9 font-mono">
+            <div className="flex items-center gap-2 text-xl sm:text-2xl font-semibold text-indigo-400 h-9 font-mono">
               <Terminal className="w-5 h-5 text-indigo-500 shrink-0" />
               <span>{currentText}</span>
               <span className="w-2 h-6 bg-indigo-500 animate-pulse" />
             </div>
           </div>
 
-          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-            Building high-performance software systems with modern web technologies, isolated microservices, and practical AI integrations designed to scale seamlessly.
+          {/* Authentic Description Paragraph */}
+          <p className="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+            Computer Science student passionate about building scalable web applications, backend systems, and AI-powered products using React, Node.js, Express, MongoDB, and modern development tools.
           </p>
 
-          {/* Focus Areas Chips */}
-          <div className="flex flex-wrap gap-2 pt-1">
-            {hero.focusAreas?.map((area, idx) => (
-              <span
-                key={idx}
-                className="px-3 py-1 text-xs font-medium bg-white/5 border border-white/10 rounded-full text-zinc-300 flex items-center gap-1.5"
-              >
-                <Sparkles className="w-3 h-3 text-indigo-400" />
-                {area}
-              </span>
-            ))}
+          {/* Real Tech Badges Chips */}
+          <div className="space-y-2 pt-1">
+            <div className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-400">Core Technologies</div>
+            <div className="flex flex-wrap gap-2">
+              {hero.focusAreas.map((area, idx) => (
+                <span
+                  key={idx}
+                  className="px-3 py-1 text-xs font-medium bg-indigo-950/40 border border-indigo-500/20 rounded-full text-indigo-200 flex items-center gap-1.5 shadow-sm"
+                >
+                  <Sparkles className="w-3 h-3 text-indigo-400" />
+                  {area}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* CTA Buttons */}
@@ -127,6 +141,16 @@ export const HeroSection: React.FC = () => {
               <span>Explore Projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
+
+            {onOpenResumeModal && (
+              <button
+                onClick={onOpenResumeModal}
+                className="px-6 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-200 font-semibold rounded-xl flex items-center gap-2 transition-all hover:border-white/20 active:scale-[0.98]"
+              >
+                <FileText className="w-4 h-4 text-indigo-400" />
+                <span>View Resume</span>
+              </button>
+            )}
 
             <button
               onClick={() => scrollTo("contact")}
@@ -158,18 +182,18 @@ export const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Callouts Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-white/10">
-            {hero.callouts?.map((item, idx) => (
-              <div key={idx} className="glass-card p-3.5 rounded-xl border border-white/5">
-                <div className="text-xl sm:text-2xl font-extrabold text-gradient">{item.value}</div>
-                <div className="text-xs text-zinc-400 font-medium mt-0.5">{item.label}</div>
+          {/* Meaningful Achievements Stats Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-6 border-t border-white/10">
+            {hero.callouts.map((item, idx) => (
+              <div key={idx} className="glass-card p-3 rounded-xl border border-white/5 text-center sm:text-left">
+                <div className="text-lg sm:text-xl font-extrabold text-gradient">{item.value}</div>
+                <div className="text-[11px] text-zinc-400 font-medium mt-0.5 leading-tight">{item.label}</div>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Right Column: Interactive Profile Portrait */}
+        {/* Right Column: Profile Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -177,29 +201,30 @@ export const HeroSection: React.FC = () => {
           className="lg:col-span-5 flex justify-center"
         >
           <div className="relative group w-full max-w-md">
-            {/* Glowing Border Background */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse-glow" />
+            {/* Subtle Ambient Background Glow */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/30 to-purple-500/30 rounded-3xl blur-lg opacity-50 group-hover:opacity-80 transition duration-700" />
             
             <div className="relative glass-card p-3 rounded-3xl border border-white/15 overflow-hidden">
               <img
-                src={hero.profileImage || "/interview-photo.jpeg"}
+                src={hero.profileImage}
                 alt={hero.name}
+                loading="lazy"
                 className="w-full h-96 sm:h-[26rem] object-cover rounded-2xl filter brightness-95 contrast-105 group-hover:scale-105 transition-transform duration-500"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "/interview-photo.jpeg";
                 }}
               />
 
-              {/* Floating Bottom Card Note */}
+              {/* Profile Card Label */}
               <div className="absolute bottom-6 inset-x-6 glass-card p-4 rounded-xl border border-white/20 backdrop-blur-xl space-y-1">
                 <div className="flex items-center justify-between text-xs text-indigo-400 font-bold tracking-wider uppercase">
                   <span>Aditya Singh</span>
-                  <span className="flex items-center gap-1 text-emerald-400 text-[10px]">
-                    <CheckCircle2 className="w-3 h-3" /> Verified Profile
+                  <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-[10px]">
+                    Computer Science Student
                   </span>
                 </div>
                 <p className="text-xs text-zinc-300 font-medium line-clamp-2">
-                  Computer Science Engineer with strong foundations in C++, MERN Stack & AI System Integrations.
+                  Passionate about building scalable web applications, backend systems, and AI-powered products.
                 </p>
               </div>
             </div>

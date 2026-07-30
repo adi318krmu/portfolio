@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Command, Download, Menu, X, Code2, Sparkles, FileText } from "lucide-react";
-import { usePortfolio } from "../../context/PortfolioContext";
+import { Command, Menu, X, Code2, FileText } from "lucide-react";
 
 interface NavbarProps {
   onOpenCommandPalette: () => void;
+  onOpenResumeModal: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
-  const { resumeUrl } = usePortfolio();
+export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenResumeModal }) => {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,11 +17,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
     { id: "projects", label: "Projects" },
-    { id: "experience", label: "Experience" },
     { id: "certificates", label: "Certificates" },
-    { id: "freelance", label: "Services" },
-    { id: "blog", label: "Blog" },
-    { id: "contact", label: "Contact" },
+    { id: "freelance", label: "Capabilities" },
+    { id: "contact", label: "Contact" }
   ];
 
   useEffect(() => {
@@ -62,7 +59,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={`flex items-center justify-between gap-2 px-4 py-2.5 rounded-full transition-all duration-300 ${
             scrolled
-              ? "bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-indigo-950/20 max-w-5xl w-full"
+              ? "bg-[#0b0f19]/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-indigo-950/20 max-w-5xl w-full"
               : "bg-[#0b0f19]/40 backdrop-blur-md border border-white/5 max-w-6xl w-full"
           }`}
         >
@@ -70,6 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <button
             onClick={() => scrollToSection("hero")}
             className="flex items-center gap-2 font-bold text-lg text-white group px-2"
+            aria-label="Aditya Singh Home"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
               <Code2 className="w-4 h-4" />
@@ -79,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             </span>
           </button>
 
-          {/* Desktop Links */}
+          {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/5">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -87,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-3 py-1.5 text-xs font-semibold rounded-full transition-colors ${
+                  className={`relative px-3.5 py-1.5 text-xs font-semibold rounded-full transition-colors ${
                     isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200"
                   }`}
                 >
@@ -110,29 +108,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             <button
               onClick={onOpenCommandPalette}
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono bg-white/5 hover:bg-white/10 text-zinc-300 rounded-lg border border-white/10 transition-colors"
-              title="Open Command Palette"
+              title="Open Command Palette (Ctrl+K)"
+              aria-label="Open Command Palette"
             >
               <Command className="w-3.5 h-3.5 text-indigo-400" />
               <span>⌘K</span>
             </button>
 
-            {/* Resume Button */}
-            <a
-              href={resumeUrl || "/resume.pdf"}
-              target="_blank"
-              rel="noopener noreferrer"
-              download="Aditya_Singh_Resume.pdf"
+            {/* Resume Button Modal Trigger */}
+            <button
+              onClick={onOpenResumeModal}
               className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-500 text-white rounded-full shadow-lg shadow-indigo-600/20 transition-all hover:scale-105 active:scale-95"
+              aria-label="Open Resume Preview Modal"
             >
               <FileText className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Resume</span>
-            </a>
+              <span>Resume</span>
+            </button>
 
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 text-zinc-300 hover:text-white lg:hidden rounded-lg bg-white/5 border border-white/10"
-              aria-label="Toggle Navigation"
+              aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -169,12 +166,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
+                  onOpenResumeModal();
+                }}
+                className="flex items-center gap-2 text-xs text-white bg-indigo-600 px-4 py-2 rounded-xl"
+              >
+                <FileText className="w-4 h-4" />
+                <span>View Resume</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
                   onOpenCommandPalette();
                 }}
-                className="flex items-center gap-2 text-xs text-zinc-400 bg-white/5 px-4 py-2 rounded-xl border border-white/5"
+                className="flex items-center gap-2 text-xs text-zinc-400 bg-white/5 px-3 py-2 rounded-xl border border-white/5"
               >
-                <Command className="w-4 h-4 text-indigo-400" />
-                <span>Command Palette (Ctrl + K)</span>
+                <Command className="w-3.5 h-3.5 text-indigo-400" />
+                <span>⌘K</span>
               </button>
             </div>
           </motion.div>

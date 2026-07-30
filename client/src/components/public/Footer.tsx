@@ -1,17 +1,19 @@
 import React from "react";
-import { Github, Linkedin, Mail, Code2, Globe } from "lucide-react";
+import { Github, Linkedin, Mail, Code2, Globe, FileText } from "lucide-react";
 import { usePortfolio } from "../../context/PortfolioContext";
 
-export const Footer: React.FC = () => {
-  const { settings, resumeUrl } = usePortfolio();
+interface FooterProps {
+  onOpenResumeModal?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onOpenResumeModal }) => {
+  const { settings } = usePortfolio();
 
   const socialLinks = settings?.socialLinks || {
     github: "https://github.com/adi318krmu",
     linkedin: "https://www.linkedin.com/in/aditya-singh-59578934b/",
     leetcode: "https://leetcode.com",
     codeforces: "https://codeforces.com",
-    codechef: "https://codechef.com",
-    geeksforgeeks: "https://geeksforgeeks.org",
     email: "adityaks0604@gmail.com"
   };
 
@@ -30,7 +32,7 @@ export const Footer: React.FC = () => {
             <span>Aditya Singh</span>
           </div>
           <p className="text-xs text-zinc-400">
-            Full Stack Engineer & AI Microservices Developer
+            Full Stack Developer & Computer Science Student
           </p>
         </div>
 
@@ -55,7 +57,7 @@ export const Footer: React.FC = () => {
             <span>LinkedIn</span>
           </a>
           <a
-            href={socialLinks.leetcode}
+            href="https://leetcode.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-amber-400 flex items-center gap-1 transition-colors"
@@ -64,7 +66,7 @@ export const Footer: React.FC = () => {
             <span>LeetCode</span>
           </a>
           <a
-            href={socialLinks.codeforces}
+            href="https://codeforces.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-400 hover:text-blue-400 flex items-center gap-1 transition-colors"
@@ -72,26 +74,17 @@ export const Footer: React.FC = () => {
             <Globe className="w-4 h-4" />
             <span>Codeforces</span>
           </a>
+          {onOpenResumeModal && (
+            <button
+              onClick={onOpenResumeModal}
+              className="text-zinc-400 hover:text-indigo-400 flex items-center gap-1 transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              <span>Resume</span>
+            </button>
+          )}
           <a
-            href={socialLinks.codechef}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-purple-400 flex items-center gap-1 transition-colors"
-          >
-            <Globe className="w-4 h-4" />
-            <span>CodeChef</span>
-          </a>
-          <a
-            href={socialLinks.geeksforgeeks}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-emerald-400 flex items-center gap-1 transition-colors"
-          >
-            <Globe className="w-4 h-4" />
-            <span>GeeksforGeeks</span>
-          </a>
-          <a
-            href={`mailto:${socialLinks.email}`}
+            href={`mailto:${socialLinks.email || "adityaks0604@gmail.com"}`}
             className="text-zinc-400 hover:text-rose-400 flex items-center gap-1 transition-colors"
           >
             <Mail className="w-4 h-4" />

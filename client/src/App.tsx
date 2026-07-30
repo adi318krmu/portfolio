@@ -12,9 +12,9 @@ import { SkillsSection } from "./components/public/SkillsSection";
 import { ProjectsSection } from "./components/public/ProjectsSection";
 import { CertificatesSection } from "./components/public/CertificatesSection";
 import { FreelanceSection } from "./components/public/FreelanceSection";
-import { BlogSection } from "./components/public/BlogSection";
 import { ContactSection } from "./components/public/ContactSection";
 import { CommandPalette } from "./components/public/CommandPalette";
+import { ResumeModal } from "./components/public/ResumeModal";
 import { Footer } from "./components/public/Footer";
 
 import { AdminLogin } from "./components/admin/AdminLogin";
@@ -22,26 +22,42 @@ import { AdminLayout } from "./components/admin/AdminLayout";
 
 const PublicPortfolio: React.FC = () => {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen relative selection:bg-indigo-500 selection:text-white">
       <BackgroundAurora />
       <CustomCursor />
-      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
+      <Navbar
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        onOpenResumeModal={() => setResumeModalOpen(true)}
+      />
       
       <main className="relative z-10 space-y-12">
-        <HeroSection />
+        <HeroSection onOpenResumeModal={() => setResumeModalOpen(true)} />
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
         <CertificatesSection />
         <FreelanceSection />
-        <BlogSection />
         <ContactSection />
       </main>
 
-      <Footer />
-      <CommandPalette isOpen={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
+      <Footer onOpenResumeModal={() => setResumeModalOpen(true)} />
+
+      {/* Global Command Palette Modal */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+        onOpenResumeModal={() => setResumeModalOpen(true)}
+      />
+
+      {/* Global Resume Preview Modal */}
+      <ResumeModal
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
+        resumeUrl="/resume.pdf"
+      />
     </div>
   );
 };

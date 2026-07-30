@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Command, ArrowRight, FolderGit2, Code2, BookOpen, Mail, FileText, Github, Linkedin, ShieldCheck } from "lucide-react";
-import { usePortfolio } from "../../context/PortfolioContext";
+import { Search, ArrowRight, FolderGit2, Code2, Mail, FileText, ShieldCheck } from "lucide-react";
+import { DETAILED_PROJECTS } from "../../data/projectsData";
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
+  onOpenResumeModal: () => void;
 }
 
-export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
-  const { projects, skills, blogs, resumeUrl } = usePortfolio();
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
+  isOpen,
+  onClose,
+  onOpenResumeModal
+}) => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -17,9 +21,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         if (isOpen) onClose();
-        else {
-          // Open handled by parent or state toggle
-        }
       } else if (e.key === "Escape" && isOpen) {
         onClose();
       }
@@ -36,8 +37,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  const filteredProjects = projects.filter((p) => p.title.toLowerCase().includes(query.toLowerCase()));
-  const filteredSkills = skills.filter((s) => s.name.toLowerCase().includes(query.toLowerCase())).slice(0, 6);
+  const filteredProjects = DETAILED_PROJECTS.filter((p) =>
+    p.title.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <AnimatePresence>
@@ -64,7 +66,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             <input
               type="text"
               autoFocus
-              placeholder="Type to search projects, skills, navigation..."
+              placeholder="Type to search projects, skills, resume, contact..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="w-full bg-transparent border-none text-white text-sm focus:outline-none placeholder:text-zinc-500 font-medium"
@@ -83,21 +85,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-xs text-zinc-300 hover:text-white transition-colors"
                 >
                   <FolderGit2 className="w-4 h-4 text-indigo-400" />
-                  <span>View Projects</span>
+                  <span>Projects Showcase</span>
                 </button>
                 <button
                   onClick={() => navigateTo("skills")}
                   className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-xs text-zinc-300 hover:text-white transition-colors"
                 >
                   <Code2 className="w-4 h-4 text-purple-400" />
-                  <span>Skills Arsenal</span>
+                  <span>Technical Skills</span>
                 </button>
                 <button
                   onClick={() => navigateTo("freelance")}
                   className="flex items-center gap-2 p-2.5 rounded-xl hover:bg-white/5 text-xs text-zinc-300 hover:text-white transition-colors"
                 >
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>Services</span>
+                  <span>Engineering Capabilities</span>
                 </button>
                 <button
                   onClick={() => navigateTo("contact")}
@@ -115,9 +117,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 <div className="text-[10px] font-mono font-bold text-zinc-500 uppercase px-3">Projects</div>
                 {filteredProjects.map((p) => (
                   <button
-                    key={p._id}
+                    key={p.id}
                     onClick={() => navigateTo("projects")}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 text-xs text-zinc-300 hover:text-white transition-colors"
+                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 text-xs text-zinc-300 hover:text-white transition-colors text-left"
                   >
                     <span className="font-semibold text-white">{p.title}</span>
                     <span className="text-[10px] font-mono text-zinc-400">{p.stack[0]}</span>
@@ -126,35 +128,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
               </div>
             )}
 
-            {/* Matching Skills */}
-            {filteredSkills.length > 0 && (
-              <div className="space-y-1">
-                <div className="text-[10px] font-mono font-bold text-zinc-500 uppercase px-3">Skills</div>
-                <div className="flex flex-wrap gap-1.5 px-3">
-                  {filteredSkills.map((s) => (
-                    <span key={s._id} className="px-2.5 py-1 bg-white/5 text-xs text-zinc-300 rounded-lg border border-white/5 font-mono">
-                      {s.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Direct Resume Download */}
+            {/* Resume Preview Trigger */}
             <div className="pt-2 border-t border-white/10">
-              <a
-                href={resumeUrl || "/resume.pdf"}
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Aditya_Singh_Resume.pdf"
-                className="flex items-center justify-between p-2.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 text-xs font-semibold transition-colors"
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenResumeModal();
+                }}
+                className="w-full flex items-center justify-between p-3 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 text-xs font-semibold transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <FileText className="w-4 h-4" />
-                  <span>Download Latest Resume (PDF)</span>
+                  <FileText className="w-4 h-4 text-indigo-400" />
+                  <span>View Resume PDF Modal</span>
                 </div>
                 <ArrowRight className="w-3.5 h-3.5" />
-              </a>
+              </button>
             </div>
           </div>
         </motion.div>
