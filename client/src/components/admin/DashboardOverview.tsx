@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AdminAPI } from "../../services/api";
-import { FolderGit2, Code2, MessageSquare, BookOpen, Award, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { FolderGit2, Code2, MessageSquare, BookOpen, Award, ArrowUpRight, CheckCircle2, FileText } from "lucide-react";
 
 interface DashboardOverviewProps {
   onNavigateTab: (tab: string) => void;
@@ -38,7 +38,7 @@ export const DashboardOverview: React.FC<DashboardOverviewProps> = ({ onNavigate
     { label: "Total Inquiries", value: stats?.messagesCount || 0, tab: "messages", icon: <MessageSquare className="w-5 h-5 text-emerald-400" /> },
     { label: "Unread Messages", value: stats?.unreadMessagesCount || 0, tab: "messages", icon: <MessageSquare className="w-5 h-5 text-rose-400" /> },
     { label: "Blog Posts", value: stats?.blogsCount || 0, tab: "blogs", icon: <BookOpen className="w-5 h-5 text-amber-400" /> },
-    { label: "Certificates", value: stats?.certificatesCount || 0, tab: "certificates", icon: <Award className="w-5 h-5 text-cyan-400" /> }
+    { label: "Active Resume", value: "PDF", tab: "resume", icon: <FileText className="w-5 h-5 text-cyan-400" /> }
   ];
 
   return (

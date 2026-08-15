@@ -25,9 +25,14 @@ export const ResumeManager: React.FC = () => {
     try {
       const res = await AdminAPI.uploadResume(formData);
       if (res.success && res.resume) {
-        setCurrentUrl(res.resume.pdfUrl);
+        let pdf = res.resume.pdfUrl;
+        if (pdf.startsWith("/uploads/")) {
+          const apiBase = import.meta.env.VITE_API_URL || "";
+          pdf = `${apiBase.replace(/\/$/, "")}${pdf}`;
+        }
+        setCurrentUrl(pdf);
         setSuccessMsg("Latest PDF Resume uploaded successfully! Old version replaced.");
-        refetchData();
+        await refetchData();
       }
     } catch (err) {
       alert("Resume upload failed.");

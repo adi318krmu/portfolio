@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import { PortfolioProvider } from "./context/PortfolioContext";
+import { PortfolioProvider, usePortfolio } from "./context/PortfolioContext";
 
 import { BackgroundAurora } from "./components/public/BackgroundAurora";
 import { CustomCursor } from "./components/public/CustomCursor";
@@ -23,6 +23,7 @@ import { AdminLayout } from "./components/admin/AdminLayout";
 const PublicPortfolio: React.FC = () => {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const { resumeUrl } = usePortfolio();
 
   return (
     <div className="min-h-screen relative selection:bg-indigo-500 selection:text-white">
@@ -56,7 +57,7 @@ const PublicPortfolio: React.FC = () => {
       <ResumeModal
         isOpen={resumeModalOpen}
         onClose={() => setResumeModalOpen(false)}
-        resumeUrl="/resume.pdf"
+        resumeUrl={resumeUrl}
       />
     </div>
   );
